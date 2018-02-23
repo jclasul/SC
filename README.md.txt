@@ -1,1 +1,0 @@
-QR generator, raw script
