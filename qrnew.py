@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
 STOCK = pd.read_excel("C:/Winkel Lydia/STOCKLIJSTEN/voorbeeld VERSIE BACKUP23 jan.xlsx", sheetname="In")
+STOCK = STOCK[STOCK["LABELED"]!=True]
 
 IMG1 = 'scsc.jpg'
 IMG2 = 'maat.jpg'
@@ -34,9 +35,9 @@ for itemstock in STOCK.itertuples():
     draw.text((355,160), PRIJS, fill=0, font=fnt_large)
     draw.text((460,100), MAAT, fill=0, font=fnt_medium)
     draw.text((360,100), "Maat :", fill=0, font=fnt_medium)
-    draw.text((690,270), ONZE_REF, fill=0, font=fnt_small)
+    draw.text((700,270), ONZE_REF, fill=0, font=fnt_small)
 
     for j in range(0,itemstock.Aantal):
         # Combine text and image
-        IMG_NAME = 'QRcodes/' + ONZE_REF + "_" + str(j) + ".PNG"
+        IMG_NAME = 'QRcodes/' + MERK + "_" + ONZE_REF + "_" + str(j+1) + ".PNG"
         imgs_comb.save(IMG_NAME)
