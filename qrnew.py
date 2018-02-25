@@ -32,8 +32,8 @@ for itemstock in STOCK.itertuples():
 
     # Draw text
     draw.text((355,160), PRIJS, fill=0, font=fnt_large)
-    draw.text((470,100), MAAT, fill=0, font=fnt_medium)
-    draw.text((370,100), "Maat :", fill=0, font=fnt_medium)
+    draw.text((460,100), MAAT, fill=0, font=fnt_medium)
+    draw.text((360,100), "Maat :", fill=0, font=fnt_medium)
     draw.text((690,270), ONZE_REF, fill=0, font=fnt_small)
 
     for j in range(0,itemstock.Aantal):
