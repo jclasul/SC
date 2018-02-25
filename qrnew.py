@@ -4,7 +4,7 @@ import PIL
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-STOCK = pd.read_excel("C:/Winkel Lydia/STOCKLIJSTEN/voorbeeld VERSIE BACKUP.xlsx", sheetname="In")
+STOCK = pd.read_excel("C:/Winkel Lydia/STOCKLIJSTEN/voorbeeld VERSIE BACKUP23 jan.xlsx", sheetname="In")
 
 IMG1 = 'scsc.jpg'
 IMG2 = 'maat.jpg'
@@ -38,10 +38,5 @@ for itemstock in STOCK.itertuples():
 
     for j in range(0,itemstock.Aantal):
         # Combine text and image
-        IMG_NAME = 'C:/Users/Raf/Desktop/QR/' + ONZE_REF + "_" + str(j) + ".PNG"
+        IMG_NAME = 'QRcodes/' + ONZE_REF + "_" + str(j) + ".PNG"
         imgs_comb.save(IMG_NAME)
-
-
-
-
-
