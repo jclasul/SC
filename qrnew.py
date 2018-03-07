@@ -4,11 +4,11 @@ import PIL
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-stock = pd.read_csv("C:/Users/JCLA/Downloads/DATABASE_IN - Form responses 1.csv")
+stock = pd.read_csv("C:/Users/JCLA/Downloads/DATABASE_IN - Form responses 1 (2).csv")
 # stock = stock[stock["LABELED"]!=True]
 
 # Convert and Format DATABASE
-stock["Timestamp"] = pd.to_datetime(stock.Timestamp)
+stock["Timestamp"] = pd.to_datetime(stock.Timestamp, dayfirst=True)
 stock["IDnr"] = stock.Timestamp.apply(lambda x: x.timestamp())
 
 IMG1 = 'scsc.jpg'
@@ -51,7 +51,7 @@ for itemstock in stock.itertuples():
             # Draw text
             draw.text((355,160), " ".join(["€",VerkoopPrijs]), fill=0, font=fnt_large)
             draw.text((360,100), maat, fill=0, font=fnt_medium)
-            draw.text((700,270), IDnr, fill=0, font=fnt_small)
+            draw.text((690,272), IDnr, fill=0, font=fnt_small)
 
             # Combine text and image
             IMG_NAME = 'QRcodes/' + Merk + "_" + IDnr + "_" + maat + "_" + str(n+1) + ".PNG"
