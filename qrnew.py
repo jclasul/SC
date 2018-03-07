@@ -4,8 +4,12 @@ import PIL
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-STOCK = pd.read_excel("C:/Winkel Lydia/STOCKLIJSTEN/voorbeeld VERSIE BACKUP23 jan.xlsx", sheetname="In")
-STOCK = STOCK[STOCK["LABELED"]!=True]
+stock = pd.read_csv("C:/Users/JCLA/Downloads/DATABASE_IN - Form responses 1.csv")
+stock = stock[stock["LABELED"]!=True]
+
+# Convert and Format DATABASE
+stock["Timestamp"] = pd.to_datetime(stock.Timestamp)
+stock["IDnr"] = stock.Timestamp.apply(lambda x: x.timestamp())
 
 IMG1 = 'scsc.jpg'
 IMG2 = 'maat.jpg'
@@ -16,7 +20,7 @@ fnt_small = ImageFont.truetype('C:/Windows/Fonts/Arial.ttf',size=15)
 fnt_medium = ImageFont.truetype('C:/Windows/Fonts/Arial.ttf',size=30)
 fnt_large = ImageFont.truetype('C:/Windows/Fonts/Arial.ttf',size=50)
 
-for itemstock in STOCK.itertuples():    
+for itemstock in stock.itertuples():    
     MAAT = str(itemstock.Maat)
     MERK = str(itemstock.Merk)
     PRIJS = "€" + str(itemstock.VerkoopPrijs)
@@ -36,8 +40,10 @@ for itemstock in STOCK.itertuples():
     draw.text((460,100), MAAT, fill=0, font=fnt_medium)
     draw.text((360,100), "Maat :", fill=0, font=fnt_medium)
     draw.text((700,270), ONZE_REF, fill=0, font=fnt_small)
-
-    for j in range(0,itemstock.Aantal):
-        # Combine text and image
-        IMG_NAME = 'QRcodes/' + MERK + "_" + ONZE_REF + "_" + str(j+1) + ".PNG"
-        imgs_comb.save(IMG_NAME)
+           
+    for maat in maten.columns:
+        for n in range(maten.loc[:,maat][0]):
+            print(maat, n)
+            # Combine text and image
+            IMG_NAME = 'QRcodes/' + MERK + "_" + ONZE_REF + "_" + str(j+1) + ".PNG"
+            imgs_comb.save(IMG_NAME)
