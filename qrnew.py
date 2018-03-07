@@ -4,7 +4,7 @@ import PIL
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-stock = pd.read_csv("C:/Users/JCLA/Downloads/DATABASE_IN - Form responses 1 (2).csv")
+stock = pd.read_csv("C:/Users/JCLA/Downloads/DATABASE_IN - Form responses 1 (3).csv")
 # stock = stock[stock["LABELED"]!=True]
 
 # Convert and Format DATABASE
@@ -37,7 +37,7 @@ for itemstock in stock.itertuples():
     for maat in maten.columns:
         for n in range(maten.loc[:,maat][0]):
             # create link to google form
-            maat_string = maat.split("[")[-1].strip("[]")
+            maat_string = maat.split("[")[-1].strip("]")
             full_url_list = [url_start, IDnr, url_mid, VerkoopPrijs, url_mid2, maat_string, url_end]
             full_url = "".join(full_url_list)
 
@@ -54,7 +54,7 @@ for itemstock in stock.itertuples():
             draw.text((690,272), IDnr, fill=0, font=fnt_small)
 
             # Combine text and image
-            IMG_NAME = 'QRcodes/' + Merk + "_" + IDnr + "_" + maat + "_" + str(n+1) + ".PNG"
+            IMG_NAME = 'QRcodes/' + Merk + "_" + IDnr + "_" + maat_string + "_" + str(n+1) + ".PNG"
             imgs_comb.save(IMG_NAME)
     
     
